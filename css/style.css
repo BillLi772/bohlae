@@ -1,0 +1,561 @@
+/* =============================================================
+   bohlae.com — Stylesheet (Redesigned)
+   ============================================================= */
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  background: #ffffff;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; }
+
+/* ── Image Placeholder ────────────────────────────────────── */
+.img-placeholder {
+  background: #f0efed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #ccc;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 8px;
+}
+
+
+/* =============================================================
+   TOP BAR — all pages
+   ============================================================= */
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 24px 12px;
+  height: 56px;
+  border-bottom: none;
+  background: #fff;
+  position: relative;
+  z-index: 100;
+}
+
+.topbar-name {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #111;
+  flex-shrink: 0;
+}
+
+.topbar-nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  margin-right: 3rem;
+}
+
+.topbar-nav a {
+  font-size: 13px;
+  color: #aaa;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.topbar-nav a:hover { color: #999; }
+
+/* ── Projects Dropdown ────────────────────────────────────── */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-label {
+  font-size: 13px;
+  color: #aaa;
+  cursor: default;
+  transition: color 0.15s;
+}
+
+.nav-dropdown:hover .nav-dropdown-label { color: #999; }
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  min-width: 160px;
+  z-index: 200;
+  text-align: right;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+
+.nav-dropdown-menu a {
+  display: block;
+  font-size: 13px;
+  color: #aaa;
+  padding: 6px 0;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.nav-dropdown-menu a:hover { color: #999; }
+
+
+/* =============================================================
+   HOME PAGE
+   ============================================================= */
+
+.home-gallery {
+  height: calc(100vh - 56px);
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* =============================================================
+   GALLERY — single image slideshow
+   ============================================================= */
+
+.gallery-single {
+  position: relative;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+.gallery-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  padding: 24px 40px 56px;
+}
+
+.gallery-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gallery-slide img {
+  max-width: 65%;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+.gallery-slide .img-placeholder {
+  width: 65%;
+  max-height: 75vh;
+  aspect-ratio: 3 / 2;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.02em;
+}
+
+
+/* =============================================================
+   PROJECT PAGES
+   ============================================================= */
+
+.project-body {
+  position: relative;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.project-sidebar {
+  position: fixed;
+  left: 0;
+  top: 56px;
+  width: 140px;
+  padding: 0 20px 24px 24px;
+  text-align: right;
+  z-index: 50;
+}
+
+.sidebar-link {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #999;
+  line-height: 2.2;
+  transition: color 0.15s;
+}
+
+.sidebar-link:hover { color: #666; }
+
+.sidebar-link.active { color: #666; }
+
+/* ── Main content ─────────────────────────────────────────── */
+.project-main {
+  margin-left: 140px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 56px);
+}
+
+.project-main .gallery-single {
+  height: calc(100vh - 56px);
+}
+
+/* ── Views ────────────────────────────────────────────────── */
+.view { display: none; }
+.view.active {
+  display: block;
+  flex: 1;
+}
+
+/* Gallery view: fills viewport height */
+#view-gallery.active {
+  height: calc(100vh - 56px);
+}
+
+/* About + Music views: horizontally and vertically centered */
+#view-about.active,
+#view-music.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 56px);
+}
+
+
+/* =============================================================
+   THUMBNAILS — 4-column grid, no captions
+   ============================================================= */
+
+.thumbnails-grid {
+  position: relative;
+  padding: 100px 40px 4rem;
+  background: #ffffff;
+}
+
+.masonry-col {
+  position: absolute;
+  top: 0;
+}
+
+.thumb-item {
+  margin-bottom: 32px;
+  background: #ffffff;
+}
+
+.thumb-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.thumb-item .img-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+}
+
+/* Pare thumbnails: cap tall portrait images, no cropping */
+.thumbnails-grid--pare .thumb-item {
+  max-height: 280px;
+}
+
+.thumbnails-grid--pare .thumb-item img {
+  height: 280px;
+  object-fit: contain;
+}
+
+
+/* =============================================================
+   ABOUT (project view)
+   ============================================================= */
+
+.about-column {
+  max-width: 500px;
+  padding: 0;
+}
+
+.about-column p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.85;
+}
+
+.about-divider {
+  border: none;
+  border-top: 0.5px solid #e8e8e6;
+  margin: 36px 0 24px;
+}
+
+.listening-link {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  transition: color 0.15s;
+}
+
+.listening-link:hover { color: #111; }
+
+
+/* =============================================================
+   MUSIC PAGES
+   ============================================================= */
+
+.music-tracklist {
+  max-width: 500px;
+  padding: 0;
+}
+
+.track-item {
+  font-size: 11px;
+  font-weight: 300;
+  color: #999;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+
+/* =============================================================
+   BIO AND INFO PAGE
+   ============================================================= */
+
+.bio-body {
+  display: flex;
+  padding: 0 80px 80px;
+  gap: 60px;
+  height: calc(100vh - 56px);
+  align-items: center;
+  justify-content: center;
+}
+
+.bio-left {
+  flex: 1;
+  max-width: 380px;
+}
+
+.bio-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.85;
+  margin-bottom: 48px;
+}
+
+.bio-contact-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.bio-contact a {
+  display: block;
+  font-size: 13px;
+  color: #555;
+  line-height: 2;
+  transition: color 0.15s;
+}
+
+.bio-contact a:hover { color: #111; }
+
+.bio-right {
+  flex: 1;
+  max-width: 500px;
+}
+
+.bio-right .img-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.bio-right img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* =============================================================
+   PAINTINGS & SCULPTURES PAGE
+   ============================================================= */
+
+.paintings-layout { min-height: 100vh; }
+
+.paintings-content {
+  padding: 40px 40px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Paintings Rows (stacked full-width) ──────────────────── */
+.paintings-row {
+  margin-bottom: 36px;
+}
+
+.paintings-row:last-child {
+  margin-bottom: 0;
+}
+
+.paintings-row .img-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+}
+
+.paintings-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.paintings-row video {
+  width: 100%;
+  display: block;
+}
+
+.paintings-row .video-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #f0efed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #ccc;
+}
+
+.paintings-caption {
+  font-size: 11px;
+  color: #999;
+  margin-top: 10px;
+}
+
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+
+/* =============================================================
+   LIGHTBOX
+   ============================================================= */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightbox-overlay img {
+  max-height: 90vh;
+  max-width: 90vw;
+  object-fit: contain;
+  cursor: default;
+}
+
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+
+@media (max-width: 900px) {
+  .bio-body {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .bio-left { max-width: 100%; }
+
+  .bio-right {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 14px 16px;
+    gap: 6px;
+  }
+
+  .topbar-nav { gap: 14px; flex-wrap: wrap; }
+
+  /* Project layout */
+  .project-body { flex-direction: column; }
+
+  .project-sidebar {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    display: flex;
+    gap: 14px;
+    padding: 12px 16px;
+    border-bottom: 0.5px solid #e8e8e6;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+
+  .project-main {
+    margin-left: 0;
+  }
+
+  .sidebar-label { margin-top: 0; }
+  .sidebar-link { line-height: 1; }
+
+  /* Gallery */
+  .gallery-single,
+  .project-main .gallery-single,
+  .home-gallery { height: 55vh; }
+
+  .gallery-slide { padding: 20px 16px 48px; }
+  .gallery-slide .img-placeholder { width: 85%; }
+
+  /* Thumbnails */
+  .thumbnails-grid {
+    padding: 12px;
+  }
+
+  .thumb-item {
+    margin-bottom: 8px;
+  }
+
+  /* About */
+  .about-column { padding: 20px 16px 60px; }
+
+  /* Music */
+  .music-tracklist { padding: 20px 16px 60px; }
+
+
+  /* Paintings */
+  .paintings-content { padding: 20px 20px 60px; }
+}

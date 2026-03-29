@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 -c \":*)",
+      "Bash(pip3 install:*)",
+      "Bash(sed -i '' 's/\\\\.jpeg\"\"/\\\\.webp\"\"/g' index.html about.html paintings.html)",
+      "Bash(sed -i '' 's/\\\\.jpg\"\"/\\\\.webp\"\"/g' paintings.html projects/pare.html projects/regrowth.html projects/railway.html)",
+      "Bash(sed -i '' '/thumb-item/s|images/pare/|images/pare/thumbs/|' /Users/wenruili/Desktop/WEBSITE/projects/pare.html)",
+      "Bash(sed -i '' '/thumb-item/s|\\\\.webp|.jpg|' /Users/wenruili/Desktop/WEBSITE/projects/pare.html)",
+      "Bash(sed -i '' '/thumb-item/s|images/regrowth/|images/regrowth/thumbs/|' /Users/wenruili/Desktop/WEBSITE/projects/regrowth.html)",
+      "Bash(sed -i '' '/thumb-item/s|\\\\.webp|.jpg|' /Users/wenruili/Desktop/WEBSITE/projects/regrowth.html)",
+      "Bash(sed -i '' '/thumb-item/s|images/railway/|images/railway/thumbs/|' /Users/wenruili/Desktop/WEBSITE/projects/railway.html)",
+      "Bash(sed -i '' '/thumb-item/s|\\\\.webp|.jpg|' /Users/wenruili/Desktop/WEBSITE/projects/railway.html)"
+    ]
+  }
+}
