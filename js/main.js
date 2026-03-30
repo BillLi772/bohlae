@@ -2,6 +2,23 @@
    bohlae.com — Main JavaScript (Redesigned)
    ============================================================= */
 
+/* ── Mobile Projects dropdown toggle ─────────────────────── */
+(function () {
+  var dropdown = document.querySelector('.nav-dropdown');
+  var label = document.querySelector('.nav-dropdown-label');
+  if (!dropdown || !label) return;
+
+  label.addEventListener('click', function (e) {
+    if (window.innerWidth > 768) return;
+    e.stopPropagation();
+    dropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', function () {
+    dropdown.classList.remove('open');
+  });
+})();
+
 /* ── Gallery auto-advance (single image, 6 s) ────────────── */
 (function () {
   var slides  = document.querySelectorAll('.gallery-slide');
@@ -69,21 +86,23 @@
   if (!grid) return;
 
   var COL_COUNT = 4;
-  var GAP = 32;
+  var GAP = window.innerWidth <= 768 ? 12 : 32;
   var resizeTimer;
   // Pare thumbnails are CSS-fixed to 280px regardless of image load state
   var isPareGrid = grid.classList.contains('thumbnails-grid--pare');
 
-  // Compute item height without waiting for the image to load.
-  // Pare: CSS sets height:280px on every img — use that constant.
-  // Other pages: derive from the intrinsic width/height attributes.
+  // Compute item height from intrinsic width/height attributes.
+  // Pare: cap portrait images at 280px; landscape uses natural ratio.
   function getItemHeight(item, colWidth) {
-    if (isPareGrid) return 280;
     var img = item.querySelector('img');
     if (img) {
       var natW = parseInt(img.getAttribute('width'))  || img.naturalWidth  || 0;
       var natH = parseInt(img.getAttribute('height')) || img.naturalHeight || 0;
-      if (natW && natH) return Math.round((natH / natW) * colWidth);
+      if (natW && natH) {
+        var h = Math.round((natH / natW) * colWidth);
+        if (isPareGrid && h > 280) h = 280;
+        return h;
+      }
     }
     return item.offsetHeight || 200;
   }
@@ -102,7 +121,8 @@
     var availableWidth = gridWidth - paddingLeft - paddingRight;
 
     var cols = window.innerWidth <= 768 ? 2 : COL_COUNT;
-    var colWidth = (availableWidth - GAP * (cols - 1)) / cols;
+    var gap = window.innerWidth <= 768 ? 12 : 32;
+    var colWidth = (availableWidth - gap * (cols - 1)) / cols;
     var colHeights = [];
     for (var c = 0; c < cols; c++) colHeights.push(0);
 
@@ -116,11 +136,11 @@
       }
 
       item.style.position = 'absolute';
-      item.style.left  = (paddingLeft + minCol * (colWidth + GAP)) + 'px';
+      item.style.left  = (paddingLeft + minCol * (colWidth + gap)) + 'px';
       item.style.top   = (paddingTop  + colHeights[minCol]) + 'px';
       item.style.width = colWidth + 'px';
 
-      colHeights[minCol] += itemHeight + GAP;
+      colHeights[minCol] += itemHeight + gap;
     });
 
     var maxH = 0;
