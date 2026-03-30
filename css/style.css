@@ -548,17 +548,28 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
     overflow: visible;
   }
 
-  .gallery-slide {
+.gallery-slide {
     position: relative;
     inset: auto;
     padding: 16px 0;
-    opacity: 1;
+    display: none; /* Hides inactive slides so they don't create empty gaps */
   }
 
+  /* Add this new block */
+  .gallery-slide.active {
+    display: flex; /* Restores the active slide */
+    opacity: 1;
+  }
+  /* Hides the topbar ONLY if the page contains a .project-body */
+  body:has(.project-body) .topbar {
+    display: none;
+  }
+  /* Update this block */
   .gallery-slide img {
     max-width: 100%;
     max-height: none;
     width: 100%;
+    height: auto; /* Crucial: stops the raw HTML height="5210" from stretching the page */
   }
 
   .gallery-slide .img-placeholder { width: 100%; }
