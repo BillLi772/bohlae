@@ -511,6 +511,7 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
     padding: 12px 24px;
     position: relative; /* Anchor for the absolute dropdown */
   }
+  .topbar-name { font-size: 13px; }
 
   /* Ensure the nav container stays on the right */
   .topbar-nav {
@@ -518,6 +519,11 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
     gap: 12px;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  .topbar-nav a,
+  .nav-dropdown-label {
+    font-size: 10px;
   }
 
   /* The container for the "Projects" click */
@@ -634,7 +640,7 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .about-column,
   .music-tracklist {
     max-width: 100%;
-    padding: 24px 0 40px; /* Reduced top padding to 24px, kept bottom at 40px */
+    padding: 16px 0 20px; /* Reduced top padding to 24px, kept bottom at 40px */
   }
   
   /* ── Thumbnails ─────────────────────────────────────────── */
