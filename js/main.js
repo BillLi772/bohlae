@@ -11,11 +11,42 @@
   var current = 0;
   var timer;
 
+  // Retry loading a failed image once after 1 second
+  function retryOnError(img) {
+    if (img._retried) return;
+    img._retried = true;
+    var src = img.src;
+    setTimeout(function () {
+      img.src = '';
+      img.src = src;
+    }, 1000);
+  }
+
+  // Preload the next image in sequence using an Image() object
+  function preloadNext() {
+    var nextIdx = ((current + 1) % slides.length + slides.length) % slides.length;
+    var nextImg = slides[nextIdx].querySelector('img');
+    if (nextImg && !nextImg._preloaded) {
+      var loader = new Image();
+      loader.src = nextImg.src;
+      nextImg._preloaded = true;
+    }
+  }
+
+  // Attach error handlers to all gallery images
+  slides.forEach(function (slide) {
+    var img = slide.querySelector('img');
+    if (img) {
+      img.addEventListener('error', function () { retryOnError(img); });
+    }
+  });
+
   function goTo(n) {
     slides[current].classList.remove('active');
     current = ((n % slides.length) + slides.length) % slides.length;
     slides[current].classList.add('active');
     if (caption) caption.textContent = slides[current].dataset.caption || '';
+    preloadNext();
   }
 
   function startTimer() {
@@ -27,6 +58,7 @@
     caption.textContent = slides[0].dataset.caption || '';
   }
 
+  preloadNext();
   startTimer();
 })();
 
@@ -108,57 +140,36 @@
 })();
 
 
-/* ── View switching + dynamic sidebar alignment ───────────── */
+/* ── View switching + fixed sidebar ─────────────────────────── */
 (function () {
   var sidebar = document.querySelector('.project-sidebar');
   var links = document.querySelectorAll('[data-view]');
   var views = document.querySelectorAll('.view');
   if (!links.length || !sidebar) return;
 
-  var currentView = 'view-gallery';
-
-  // Align sidebar top to gallery image top after image loads
-  function alignSidebarToGallery() {
-    var galleryView = document.getElementById('view-gallery');
-    if (!galleryView) return;
-
-    var wasHidden = !galleryView.classList.contains('active');
-
-    if (wasHidden) {
-      galleryView.style.display = 'block';
-      galleryView.style.visibility = 'hidden';
-      galleryView.style.position = 'absolute';
-    }
-
-    var slide = galleryView.querySelector('.gallery-slide.active') || galleryView.querySelector('.gallery-slide');
+  // Lock sidebar top once: align to the first gallery image's top edge,
+  // then never recalculate regardless of view switches or content changes.
+  function lockSidebar() {
+    var slide = document.querySelector('.gallery-slide.active') || document.querySelector('.gallery-slide');
     if (slide) {
-      var img = slide.querySelector('img') || slide.querySelector('.img-placeholder');
+      var img = slide.querySelector('img');
       if (img && img.complete && img.naturalHeight > 0) {
-        var imgTop = img.getBoundingClientRect().top;
-        sidebar.style.top = imgTop + 'px';
+        sidebar.style.top = img.getBoundingClientRect().top + 'px';
+        return true;
       }
     }
+    return false;
+  }
 
-    if (wasHidden) {
-      galleryView.style.display = '';
-      galleryView.style.visibility = '';
-      galleryView.style.position = '';
+  var firstImg = document.querySelector('.gallery-slide img');
+  if (firstImg) {
+    if (firstImg.complete && firstImg.naturalHeight > 0) {
+      lockSidebar();
+    } else {
+      firstImg.addEventListener('load', function () { lockSidebar(); });
     }
   }
-
-  // Align sidebar top to about text block top after render
-  function alignSidebarToAbout() {
-    var el = document.querySelector('#view-about .about-column');
-    if (!el) return;
-    sidebar.style.top = el.getBoundingClientRect().top + 'px';
-  }
-
-  // Align sidebar top to music tracklist top after render
-  function alignSidebarToMusic() {
-    var el = document.querySelector('#view-music .music-tracklist');
-    if (!el) return;
-    sidebar.style.top = el.getBoundingClientRect().top + 'px';
-  }
+  window.addEventListener('load', lockSidebar);
 
   function activateView(viewId, clickedLink) {
     views.forEach(function (v) { v.classList.remove('active'); });
@@ -168,19 +179,9 @@
     links.forEach(function (l) { l.classList.remove('active'); });
     if (clickedLink) clickedLink.classList.add('active');
 
-    currentView = viewId;
-
-    // Re-layout masonry if switching to thumbnails.
-    // Run synchronously — heights are computed from attributes, no image load needed.
+    // Re-layout masonry if switching to thumbnails
     if (viewId === 'view-thumbs' && window._layoutMasonry) {
       window._layoutMasonry();
-    }
-
-    // Align sidebar for about and music views after layout settles
-    if (viewId === 'view-about') {
-      requestAnimationFrame(alignSidebarToAbout);
-    } else if (viewId === 'view-music') {
-      requestAnimationFrame(alignSidebarToMusic);
     }
   }
 
@@ -189,32 +190,6 @@
       e.preventDefault();
       activateView(link.dataset.view, link);
     });
-  });
-
-  // Initial alignment — wait for first gallery image to load
-  var firstSlide = document.querySelector('.gallery-slide');
-  if (firstSlide) {
-    var firstImg = firstSlide.querySelector('img');
-    if (firstImg) {
-      if (firstImg.complete && firstImg.naturalHeight > 0) {
-        alignSidebarToGallery();
-      } else {
-        firstImg.addEventListener('load', alignSidebarToGallery);
-      }
-    }
-  }
-
-  window.addEventListener('load', alignSidebarToGallery);
-  window.addEventListener('resize', function () {
-    setTimeout(function () {
-      if (currentView === 'view-gallery') {
-        alignSidebarToGallery();
-      } else if (currentView === 'view-about') {
-        alignSidebarToAbout();
-      } else if (currentView === 'view-music') {
-        alignSidebarToMusic();
-      }
-    }, 50);
   });
 })();
 
