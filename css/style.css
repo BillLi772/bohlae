@@ -506,9 +506,9 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .topbar {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: left;
     justify-content: space-between;
-    padding: 12px 24px;
+    padding: 24px 8px;
     position: relative; /* Anchor for the absolute dropdown */
   }
   .topbar-name { font-size: 13px; }
@@ -518,7 +518,7 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
     display: flex;
     gap: 12px;
     justify-content: flex-end;
-    align-items: center;
+    align-items: left;
   }
 
   .topbar-nav a,
@@ -634,13 +634,13 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   #view-music.active {
     height: auto;
     min-height: calc(100vh - 100px);
-    padding: 0 24px;
+    padding: 0 12px;
   }
 
   .about-column,
   .music-tracklist {
     max-width: 100%;
-    padding: 16px 0 20px; /* Reduced top padding to 24px, kept bottom at 40px */
+    padding: 8px 0 8px; /* Reduced top padding to 24px, kept bottom at 40px */
   }
   
   /* ── Thumbnails ─────────────────────────────────────────── */
