@@ -553,32 +553,36 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   /* ── Home page ──────────────────────────────────────────── */
   .home-gallery,
   .home-gallery.gallery-single {
-    height: auto;
-    overflow: visible;
+    height: calc(100vh - 56px);
+    overflow: hidden;
   }
 
   .gallery-slide {
     position: relative;
     inset: auto;
-    padding: 24px 16px 0;
+    padding: 32px 12px 0;
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   /* Add this new block */
   .gallery-slide.active {
-    display: flex; /* Restores the active slide */
+    display: flex;
     opacity: 1;
   }
 
   body:has(.project-body) .topbar-nav {
     display: none;
   }
-  /* Update this block */
+
   .gallery-slide img {
     max-width: 100%;
-    max-height: none;
-    width: 100%;
-    height: auto; /* Crucial: stops the raw HTML height="5210" from stretching the page */
+    max-height: calc(100vh - 160px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 
   .gallery-slide .img-placeholder { width: 100%; }
@@ -586,7 +590,8 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .gallery-caption {
     position: relative;
     bottom: auto;
-    padding: 10px 0 0;
+    padding: 16px 0 0;
+    font-size: 10px;
   }
 
   /* ── Project layout ─────────────────────────────────────── */
@@ -623,12 +628,13 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   /* Gallery view on project pages */
   .gallery-single,
   .project-main .gallery-single {
-    height: auto;
-    overflow: visible;
+    height: calc(100vh - 56px);
+    overflow: hidden;
   }
 
   #view-gallery.active {
-    height: auto;
+    height: calc(100vh - 56px);
+    overflow: hidden;
   }
 
   /* About + Music views on project pages */
@@ -644,7 +650,7 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .about-column,
   .music-tracklist {
     max-width: 100%;
-    padding: 16px 0 40px;
+    padding: 24px 0 40px;
   }
   
   /* ── Thumbnails ─────────────────────────────────────────── */
@@ -676,5 +682,9 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   }
 
   /* ── Paintings ──────────────────────────────────────────── */
-  .paintings-content { padding: 20px 16px 48px; }
+  .paintings-content { padding: 20px 12px 48px; }
+
+  .paintings-caption {
+    font-size: 10px;
+  }
 }
