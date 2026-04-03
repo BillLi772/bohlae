@@ -506,19 +506,21 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .topbar {
     display: flex;
     flex-direction: row;
-    align-items: left;
+    align-items: flex-end;
     justify-content: space-between;
-    padding: 24px 8px;
-    position: relative; /* Anchor for the absolute dropdown */
+    padding: 16px 16px 12px;
+    position: relative;
   }
-  .topbar-name { font-size: 13px; }
+  .topbar-name { font-size: 13px; flex-shrink: 0; }
 
   /* Ensure the nav container stays on the right */
   .topbar-nav {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     justify-content: flex-end;
-    align-items: left;
+    align-items: flex-end;
+    margin-left: auto;
+    margin-right: 0;
   }
 
   .topbar-nav a,
@@ -558,8 +560,8 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .gallery-slide {
     position: relative;
     inset: auto;
-    padding: 52px 0 16px;
-    display: none; /* Hides inactive slides so they don't create empty gaps */
+    padding: 24px 16px 0;
+    display: none;
   }
 
   /* Add this new block */
@@ -584,7 +586,7 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .gallery-caption {
     position: relative;
     bottom: auto;
-    padding: 8px 0;
+    padding: 10px 0 0;
   }
 
   /* ── Project layout ─────────────────────────────────────── */
@@ -633,14 +635,16 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   #view-about.active,
   #view-music.active {
     height: auto;
-    min-height: calc(100vh - 100px);
-    padding: 0 12px;
+    min-height: 0;
+    padding: 0 16px;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .about-column,
   .music-tracklist {
     max-width: 100%;
-    padding: 8px 0 8px; /* Reduced top padding to 24px, kept bottom at 40px */
+    padding: 16px 0 40px;
   }
   
   /* ── Thumbnails ─────────────────────────────────────────── */
