@@ -433,17 +433,22 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   display: block;
 }
 
-/* Portrait painting: cap width so it doesn't dominate */
+/* Portrait painting: restrained width, centered */
 .paintings-row--portrait {
-  max-width: 60%;
+  max-width: 35%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 4-across row for grouped paintings */
 .paintings-grid-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 12px;
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .paintings-grid-row img {
@@ -711,6 +716,7 @@ img { display: block; width: 100%; -webkit-user-drag: none; pointer-events: none
   .paintings-grid-row {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
+    max-width: 100%;
   }
 
   .paintings-row--portrait {
