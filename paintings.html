@@ -6,59 +6,6 @@
   <title>Paintings &amp; Sculptures — bohlae</title>
   <meta name="robots" content="noimageindex">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Spatial overrides only — paintings page */
-    .paintings-content {
-      max-width: 1100px;
-      padding: 48px 40px 80px;
-    }
-    .paintings-row {
-      margin-bottom: 56px;
-    }
-    .pw-portrait {
-      max-width: 32%;
-      margin: 0 auto 56px;
-    }
-    .pw-portrait img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .pw-landscape-row {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      max-width: 75%;
-      margin: 0 auto 10px;
-      align-items: stretch;
-    }
-    .pw-landscape-row img {
-      flex: 1 1 0;
-      min-width: 0;
-      object-fit: cover;
-      display: block;
-      height: 220px;
-    }
-    @media (max-width: 768px) {
-      .paintings-content {
-        padding: 20px 12px 48px;
-      }
-      .paintings-row { margin-bottom: 36px; }
-      .pw-portrait {
-        max-width: 100%;
-        margin: 0 0 36px;
-      }
-      .pw-landscape-row {
-        flex-wrap: wrap;
-        max-width: 100%;
-        gap: 6px;
-      }
-      .pw-landscape-row img {
-        flex: 1 1 calc(50% - 3px);
-        height: 140px;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -82,50 +29,68 @@
 
   <div class="paintings-content">
 
-    <!-- ── Sculptures ── -->
+    <!-- ── Sculptures (full-width, original format) ── -->
     <div class="paintings-row">
       <img src="images/paintings/sculpture_00.webp" alt="Untitled I" width="8368" height="5584">
-      <div class="paintings-caption">Untitled I — [medium, year]</div>
+      <div class="paintings-caption">Untitled I — kaws elmo figure, 3d printing filament, 2025</div>
     </div>
 
     <div class="paintings-row">
-      <img src="images/paintings/sculpture_01.webp" alt="Untitled" width="8368" height="5584">
+      <img src="images/paintings/sculpture_01.webp" alt="Untitled II" width="8368" height="5584">
     </div>
 
     <div class="paintings-row">
       <video controls muted preload="metadata" poster="images/paintings/video-cover.webp">
         <source src="images/paintings/sculpture_02.MP4" type="video/mp4">
       </video>
-      <div class="paintings-caption">Untitled — [description, year]</div>
+      <div class="paintings-caption">Untitled — steel, blow dryer, plastic bags, 2025</div>
     </div>
 
-    <!-- ── Painting 06 ── -->
-    <div class="pw-portrait">
-      <img src="images/paintings/painting_06.webp" alt="Oil on canvas">
-      <div class="paintings-caption">Oil on canvas</div>
-    </div>
+    <!-- ── Paintings ── -->
 
-    <!-- ── Painting 07 (figurative) — uncomment when file is added
-    <div class="pw-portrait">
+    <!-- Landscape — full row -->
+    <div class="painting-full">
       <img src="images/paintings/painting_07.webp" alt="Oil on canvas">
-      <div class="paintings-caption">Oil on canvas</div>
-    </div>
-    -->
-
-    <!-- ── Painting 05 ── -->
-    <div class="pw-portrait">
-      <img src="images/paintings/painting_05.webp" alt="Oil on canvas">
-      <div class="paintings-caption">Oil on canvas</div>
+      <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
     </div>
 
-    <!-- ── Landscape series (4 across) ── -->
-    <div class="pw-landscape-row">
+    <!-- Portraits — two per row -->
+    <div class="painting-pair">
+      <div class="painting-pair-item">
+        <img src="images/paintings/painting_06.webp" alt="Oil on canvas">
+        <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
+      </div>
+      <div class="painting-pair-item">
+        <img src="images/paintings/painting_05.webp" alt="Oil on canvas">
+        <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
+      </div>
+    </div>
+
+    <!-- Landscape — full row -->
+    <div class="painting-full">
       <img src="images/paintings/painting_01.webp" alt="Landscape, oil on canvas">
-      <img src="images/paintings/painting_02.webp" alt="Landscape, oil on canvas">
-      <img src="images/paintings/painting_03.webp" alt="Landscape, oil on canvas">
-      <img src="images/paintings/painting_04.webp" alt="Landscape, oil on canvas">
+      <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
     </div>
-    <div class="paintings-caption" style="max-width:75%;margin-left:auto;margin-right:auto;">Oil on canvas</div>
+
+    <!-- Landscape — full row -->
+    <div class="painting-full">
+      <img src="images/paintings/painting_03.webp" alt="Landscape, oil on canvas">
+      <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
+    </div>
+
+    <!-- Portrait — centered single -->
+    <div class="painting-pair painting-pair--single">
+      <div class="painting-pair-item">
+        <img src="images/paintings/painting_02.webp" alt="Oil on canvas">
+        <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
+      </div>
+    </div>
+
+    <!-- Landscape — full row -->
+    <div class="painting-full">
+      <img src="images/paintings/painting_04.webp" alt="Landscape, oil on canvas">
+      <div class="paintings-caption">Untitled — oil on canvas, 2023</div>
+    </div>
 
   </div>
 

@@ -11,7 +11,14 @@
       "Bash(sed -i '' '/thumb-item/s|images/regrowth/|images/regrowth/thumbs/|' /Users/wenruili/Desktop/WEBSITE/projects/regrowth.html)",
       "Bash(sed -i '' '/thumb-item/s|\\\\.webp|.jpg|' /Users/wenruili/Desktop/WEBSITE/projects/regrowth.html)",
       "Bash(sed -i '' '/thumb-item/s|images/railway/|images/railway/thumbs/|' /Users/wenruili/Desktop/WEBSITE/projects/railway.html)",
-      "Bash(sed -i '' '/thumb-item/s|\\\\.webp|.jpg|' /Users/wenruili/Desktop/WEBSITE/projects/railway.html)"
+      "Bash(sed -i '' '/thumb-item/s|\\\\.webp|.jpg|' /Users/wenruili/Desktop/WEBSITE/projects/railway.html)",
+      "Bash(grep -E '\\\\.\\(webp|MP4|mp4\\)$')",
+      "Bash(python3 -c \"import http.server; print\\(''ok''\\)\")",
+      "Bash(chmod -R a+r /Users/wenruili/Desktop/WEBSITE/)",
+      "Bash(rm -rf /tmp/website-preview)",
+      "Bash(cp -R /Users/wenruili/Desktop/WEBSITE /tmp/website-preview)",
+      "Bash(cp /Users/wenruili/Desktop/WEBSITE/css/style.css /tmp/website-preview/css/style.css)",
+      "Bash(cp /Users/wenruili/Desktop/WEBSITE/paintings.html /tmp/website-preview/paintings.html)"
     ]
   }
 }
